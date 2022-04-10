@@ -1,4 +1,4 @@
-# Pong_Game_on_Different_Environments \n
+# Pong_Game_on_Different_Environments 
 
 This one made for my collage Software Project Development lecture. The aim of this project is not game development, its learning working with different API's and improve our alghoritmic thinking skills
 
