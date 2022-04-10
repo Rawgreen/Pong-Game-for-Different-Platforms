@@ -7,8 +7,9 @@
 
 // <----------------------------------- Global Variables ----------------------------------->
 
-//player properties
+// Score properties
 int P1 = 0;
+int PCresult = 0;
 
 // play settings
 #define kb_esc      27
@@ -32,6 +33,7 @@ static float bounce = 1;
 // output text
 char string[30];
 
+// ball and paddle
 struct ba_pa
 {
 	float left;
@@ -40,15 +42,17 @@ struct ba_pa
 	float size;
 };
 
-// like python lists
+// similar structure like python lists
 ba_pa ball = { 100, 100, 120, 120 };
 
+// outer bounds
 ba_pa wall;
 
+//player paddle
 ba_pa paddle = { 0, 490, 40, 500 };
 
 
-// draw paddle, ball
+// for drawing paddle, ball
 void Draw_Rectangle(ba_pa rect)
 {
 	glBegin(GL_QUADS);
@@ -59,6 +63,7 @@ void Draw_Rectangle(ba_pa rect)
 	glEnd();
 }
 
+// necessary function to ball move and refresh rate
 void Timer(int v)
 {
 	ball.left += ball_x_speed;
@@ -69,6 +74,7 @@ void Timer(int v)
 	glutTimerFunc(1, Timer, 1);
 }
 
+// outputting some texts
 void outtextxy(char* string, int x, int y)
 {
 	char* c;
@@ -86,6 +92,7 @@ void outtextxy(char* string, int x, int y)
 	glPopMatrix();
 }
 
+// game end logic
 void game_end()
 {
 	printf("GAME OVER");
@@ -127,6 +134,7 @@ void mouse_motion(int x, int y)
 	mouse_pos_x = x;
 }
 
+// clearing screen
 void gl_Settings()
 {
 	// specifying red, green, blue and alpha values used by
@@ -152,7 +160,6 @@ void Reshape(int width, int height)
 	glLoadIdentity();
 }
 
-int PCresult = 0;
 
 void Display()
 {
@@ -183,7 +190,8 @@ void Display()
 		ball_y_speed *= -(bounce);
 		PCresult += 1;
 	}
-
+	
+	// paddle drawing and paddle movement
 	Draw_Rectangle(paddle);
 	paddle.left = mouse_pos_x - 20;
 	paddle.thick = mouse_pos_x + 40;
